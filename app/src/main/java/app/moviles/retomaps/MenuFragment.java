@@ -15,14 +15,14 @@ import android.view.ViewGroup;
  */
 public class MenuFragment extends Fragment {
 
-    //state
+    //State
 
 
     public MenuFragment() {
         // Required empty public constructor
     }
 
-    public static MenuFragment newInstance(String param1, String param2) {
+    public static MenuFragment newInstance() {
         MenuFragment fragment = new MenuFragment();
         Bundle args = new Bundle();
         fragment.setArguments(args);
