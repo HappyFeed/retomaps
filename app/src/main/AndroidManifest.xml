@@ -34,6 +34,16 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBvN5D_SwukfiJsdLnAeddgin7-aN7dWrA" />
 
+        <provider
+            android:authorities="app.moviles.retomaps.fileprovider"
+            android:name="androidx.core.content.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"></meta-data>
+        </provider>
+
         <activity android:name=".Menu">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

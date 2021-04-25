@@ -11,6 +11,7 @@ import android.media.MediaScannerConnection;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.core.content.FileProvider;
 import androidx.fragment.app.Fragment;
 
 import android.os.Environment;
@@ -121,15 +122,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
                 picView.setImageURI(miPath);
                 break;
             case CODIGO_TOMAR:
-                MediaScannerConnection.scanFile(getContext(), new String[]{path}, null,
-                    new MediaScannerConnection.OnScanCompletedListener(){
-                    @Override
-                    public void onScanCompleted(String path, Uri uri) {
-                        Log.i("Path"," "+path);
-                    }
-                });
-
-                bitmap = BitmapFactory.decodeFile(path);
+                Bitmap bitmap = BitmapFactory.decodeFile(path);
                 picView.setImageBitmap(bitmap);
                 break;
         }
@@ -157,25 +150,46 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
     }
 
     private void abrirCamara(){
-        File miFile = new File(root.getContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES));
+        /*File miFile = new File(Environment.getExternalStorageDirectory(), Environment.DIRECTORY_PICTURES);
         boolean isCreada = miFile.exists();
         if(isCreada == false){
             isCreada = miFile.mkdirs();
             System.err.println(miFile);
-        }
+        }*/
 
-        if(isCreada == true){
-            Long consecutivo = System.currentTimeMillis();
+            /*Long consecutivo = System.currentTimeMillis();
             String nombre = consecutivo.toString()+".jpg";
 
             path = Environment.getExternalStorageDirectory() +File.separator+DIRECTORIO_IMAGEN+File.separator+nombre;
 
-            file = new File(path);
+            file = new File(path);*/
 
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
-            intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.parse(path));
+            if(intent.resolveActivity(getContext().getPackageManager()) != null){
+                File imagenArchivo = null;
+
+                try{
+                    imagenArchivo = crearImagen();
+                }catch (IOException e){
+                    Log.e("Error", e.toString());
+                }
+
+                if(imagenArchivo !=null){
+                    Uri fotoUri = FileProvider.getUriForFile(getContext(),"app.moviles.retomaps.fileprovider", imagenArchivo);
+                    intent.putExtra(MediaStore.EXTRA_OUTPUT, fotoUri);
+                }
+            }
+            //intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
 
             startActivityForResult(intent, CODIGO_TOMAR);
-        }
+    }
+
+    private File crearImagen() throws IOException{
+        String nombreImagen = "foto";
+        File directorio = getContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES);
+        File imagen = File.createTempFile(nombreImagen, ".jpg", directorio);
+
+        path = imagen.getAbsolutePath();
+        return  imagen;
     }
 }
