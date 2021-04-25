@@ -55,8 +55,8 @@
         android:layout_marginTop="16dp"
         android:backgroundTint="#FFFFFF"
         android:ems="10"
+        android:hint="   Nombre del lugar"
         android:inputType="textPersonName"
-        android:text="   Nombre"
         android:textAlignment="viewStart"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="#FFFFFF"
@@ -74,6 +74,7 @@
         app:layout_constraintHorizontal_bias="0.208"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName"
+        app:srcCompat="@drawable/baseline_room_black_24dp"
         tools:src="@tools:sample/avatars" />
 
     <TextView
@@ -93,7 +94,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/dirrecionText"
         android:layout_width="0dp"
         android:layout_height="16dp"
         android:layout_marginStart="5dp"
@@ -115,22 +116,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.157"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/dirrecionText" />
 
     <ImageButton
-        android:id="@+id/imageButton"
+        android:id="@+id/agregarPicBtn"
         android:layout_width="71dp"
         android:layout_height="65dp"
         android:layout_marginTop="16dp"
         android:backgroundTint="#FFFFFF"
-        android:src="@android:drawable/ic_menu_add"
+        android:src="@drawable/baseline_add_black_24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.16"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/registrarBtn"
         android:layout_width="173dp"
         android:layout_height="65dp"
         android:backgroundTint="#CA4646"
@@ -141,19 +142,31 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.483"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageButton"
+        app:layout_constraintTop_toBottomOf="@+id/agregarPicBtn"
         app:layout_constraintVertical_bias="0.217" />
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/picView"
         android:layout_width="76dp"
         android:layout_height="64dp"
         android:layout_marginTop="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintBottom_toTopOf="@+id/registrarBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/imageButton"
+        app:layout_constraintStart_toEndOf="@+id/agregarPicBtn"
         app:layout_constraintTop_toBottomOf="@+id/textView6"
         app:layout_constraintVertical_bias="0.0"
         tools:src="@tools:sample/avatars" />
+
+    <ImageButton
+        android:id="@+id/buscarLocacionbtn"
+        android:layout_width="54dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="7dp"
+        android:layout_marginTop="86dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/editTextTextPersonName"
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:srcCompat="@drawable/baseline_search_black_24dp" />
 </androidx.constraintlayout.widget.ConstraintLayout>

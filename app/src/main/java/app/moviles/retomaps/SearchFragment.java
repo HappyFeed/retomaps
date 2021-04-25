@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 
 public class SearchFragment extends Fragment {
 
-    private Context context ;
+    //private Context context ;
     private RecyclerView listPlaces;
     private LinearLayoutManager linearLayoutManager;
     private SearchAdapter adapter;
@@ -34,20 +34,20 @@ public class SearchFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        context = getContext();
 
-        listPlaces = getActivity().findViewById(R.id.listPlaces);
 
-        linearLayoutManager = new LinearLayoutManager(context);
-        listPlaces.setLayoutManager(linearLayoutManager);
-        adapter = new SearchAdapter();
-        listPlaces.setAdapter(adapter);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+         View vista = inflater.inflate(R.layout.fragment_search, container, false);
+        listPlaces = vista.findViewById(R.id.listPlaces);
+        linearLayoutManager = new LinearLayoutManager(getContext());
+        listPlaces.setLayoutManager(linearLayoutManager);
+        adapter = new SearchAdapter();
+        listPlaces.setAdapter(adapter);
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_search, container, false);
+        return vista;
     }
 }
