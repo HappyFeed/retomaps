@@ -7,15 +7,21 @@ public class Place {
     private String id;
     private String nombre;
     private String direccion;
+    private double calificacion;
+    private String imageUrl;
     private double lat;
     private double lng;
 
-    public Place(String id, String nombre, String telefono, double lat, double lng) {
+
+
+    public Place(String id, String nombre, String telefono, double lat, double lng, double calificacion, String imageUrl) {
         this.id = id;
         this.nombre = nombre;
         this.direccion = telefono;
         this.lat = lat;
         this.lng = lng;
+        this.calificacion = calificacion;
+        this.imageUrl = imageUrl;
     }
 
     public Place() {
@@ -59,5 +65,29 @@ public class Place {
 
     public void setTelefono(String direccion) {
         this.direccion = direccion;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public double getCalificacion() {
+        return calificacion;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
+    }
+
+    public void setCalificacion(double calificacion) {
+        this.calificacion = calificacion;
+    }
+
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 }
