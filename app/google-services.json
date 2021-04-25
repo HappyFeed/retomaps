@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "432670921382",
+    "project_id": "retomaps-a3c32",
+    "storage_bucket": "retomaps-a3c32.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:432670921382:android:a822fd87196532a6845a67",
+        "android_client_info": {
+          "package_name": "app.moviles.retomaps"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "432670921382-tvd38k8mci0u502kanr5idg5a61lhlg5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDc5NMFXfc_BGnZbvxFEKWTvma8SMWSJEs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "432670921382-tvd38k8mci0u502kanr5idg5a61lhlg5.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

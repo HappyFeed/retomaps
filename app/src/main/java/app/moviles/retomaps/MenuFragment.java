@@ -25,11 +25,15 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -45,15 +49,14 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
     private static final String DIRECTORIO_IMAGEN = CARPETA_PRINCIPAL + CARPETA_IMAGEN;
     private String path;
 
-
+    private  List<Address> direcciones;
     private EditText editTextTextPersonName;
     private TextView dirrecionText;
     private Button registrarBtn;
     private ImageButton agregarPicBtn, buscarLocacionbtn;
     private ImageView picView;
     private View root;
-    private File file;
-    private Bitmap bitmap;
+    private FirebaseFirestore db;
 
     public MenuFragment() {
         // Required empty public constructor
@@ -80,6 +83,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
         agregarPicBtn = root.findViewById(R.id.agregarPicBtn);
         agregarPicBtn.setOnClickListener(this);
         picView = root.findViewById(R.id.picView);
+        db = FirebaseFirestore.getInstance();
 
         return root;
     }
@@ -90,7 +94,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
                     try{
                         String location = editTextTextPersonName.getText().toString();
                         Geocoder geocoder = new Geocoder(root.getContext());
-                        List<Address> direcciones = geocoder.getFromLocationName(location,5);
+                        direcciones = geocoder.getFromLocationName(location,1);
                         dirrecionText.setText(direcciones.get(0).getAddressLine(0));
                     }catch(IOException ioe){
                         System.err.println("IOEstream");
@@ -108,7 +112,16 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
                 break;
             case R.id.agregarPicBtn:
                 mostrarOpciones();
-                break;    
+                break;
+            case R.id.registrarBtn:
+                Place nPlace = new Place(UUID.randomUUID().toString(), editTextTextPersonName.getText().toString(), direcciones.get(0).getAddressLine(0), direcciones.get(0).getLatitude(), direcciones.get(0).getLongitude(), 0, path );
+                db.collection("places").document(nPlace.getId()).set(nPlace).addOnSuccessListener(
+                        command -> {
+                            Toast.makeText(getContext(), "Registrar places", Toast.LENGTH_SHORT).show();;
+                            clearData();
+                        }
+                );
+                break;
         }
     }
 
@@ -150,24 +163,6 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
     }
 
     private void abrirCamara(){
-<<<<<<< HEAD
-        /*File miFile = new File(Environment.getExternalStorageDirectory(), Environment.DIRECTORY_PICTURES);
-=======
-        File miFile = new File(String.valueOf(root.getContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES)));
->>>>>>> d028fccdf03e837dcb6e3601d6a9778a559e1280
-        boolean isCreada = miFile.exists();
-        if(isCreada == false){
-            isCreada = miFile.mkdirs();
-            System.err.println(miFile);
-        }*/
-
-            /*Long consecutivo = System.currentTimeMillis();
-            String nombre = consecutivo.toString()+".jpg";
-
-            path = Environment.getExternalStorageDirectory() +File.separator+DIRECTORIO_IMAGEN+File.separator+nombre;
-
-            file = new File(path);*/
-
             Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
             if(intent.resolveActivity(getContext().getPackageManager()) != null){
                 File imagenArchivo = null;
@@ -183,8 +178,6 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
                     intent.putExtra(MediaStore.EXTRA_OUTPUT, fotoUri);
                 }
             }
-            //intent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(file));
-
             startActivityForResult(intent, CODIGO_TOMAR);
     }
 
@@ -195,5 +188,11 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
 
         path = imagen.getAbsolutePath();
         return  imagen;
+    }
+
+    private void clearData(){
+        editTextTextPersonName.setText("");
+        dirrecionText.setText("");
+        picView.setImageDrawable(null);
     }
 }

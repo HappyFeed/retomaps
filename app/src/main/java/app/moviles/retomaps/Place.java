@@ -14,10 +14,10 @@ public class Place {
 
 
 
-    public Place(String id, String nombre, String telefono, double lat, double lng, double calificacion, String imageUrl) {
+    public Place(String id, String nombre, String direccion, double lat, double lng, double calificacion, String imageUrl) {
         this.id = id;
         this.nombre = nombre;
-        this.direccion = telefono;
+        this.direccion = direccion;
         this.lat = lat;
         this.lng = lng;
         this.calificacion = calificacion;
@@ -51,7 +51,7 @@ public class Place {
         return nombre;
     }
 
-    public String getTelefono() {
+    public String getDireccion() {
         return direccion;
     }
 
@@ -61,14 +61,6 @@ public class Place {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
-    }
-
-    public void setTelefono(String direccion) {
-        this.direccion = direccion;
-    }
-
-    public String getDireccion() {
-        return direccion;
     }
 
     public double getCalificacion() {

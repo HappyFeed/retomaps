@@ -18,8 +18,6 @@ public class SearchAdapter extends RecyclerView.Adapter<LocationView> {
 
     public SearchAdapter(){
         places = new ArrayList<Place>();
-
-        places.add(new Place(UUID.randomUUID().toString(), "ICESI", "CAÑASGORDAS"));
     }
 
     public void addPlace(Place p){
@@ -39,12 +37,16 @@ public class SearchAdapter extends RecyclerView.Adapter<LocationView> {
     @Override
     public void onBindViewHolder(@NonNull LocationView holder, int position) {
         holder.getNombre().setText(places.get(position).getNombre());
-        holder.getDireccion().setText(places.get(position).getTelefono());
+        holder.getDireccion().setText(places.get(position).getDireccion());
     }
 
     @Override
     public int getItemCount() {
         return places.size();
+    }
+
+    public void addLocation(Place p){
+        places.add(p);
     }
 
 }
