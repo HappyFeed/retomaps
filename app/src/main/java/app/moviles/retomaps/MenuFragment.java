@@ -157,7 +157,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
     }
 
     private void abrirCamara(){
-        File miFile = new File(root.getContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES));
+        File miFile = new File(String.valueOf(root.getContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES)));
         boolean isCreada = miFile.exists();
         if(isCreada == false){
             isCreada = miFile.mkdirs();
