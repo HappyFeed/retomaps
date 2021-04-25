@@ -1,10 +1,13 @@
 package app.moviles.retomaps;
 
+import android.media.Image;
+
 public class Place {
 
     private String id;
     private String nombre;
     private String direccion;
+
 
     public Place(String id, String nombre, String telefono) {
         this.id = id;
