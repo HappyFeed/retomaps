@@ -89,19 +89,16 @@ public class MenuFragment extends Fragment implements View.OnClickListener{
     }
 
     public void buscarLocacion() {
-        new Thread(
-                () ->{
-                    try{
-                        String location = editTextTextPersonName.getText().toString();
-                        Geocoder geocoder = new Geocoder(root.getContext());
-                        direcciones = geocoder.getFromLocationName(location,1);
-                        dirrecionText.setText(direcciones.get(0).getAddressLine(0));
-                    }catch(IOException ioe){
-                        System.err.println("IOEstream");
-                    }
-                }
-        ).start();
-
+        try{
+            String location = editTextTextPersonName.getText().toString();
+            Geocoder geocoder = new Geocoder(root.getContext());
+            direcciones = geocoder.getFromLocationName(location,1);
+            dirrecionText.setText(direcciones.get(0).getAddressLine(0));
+        }catch(IOException ioe){
+            System.err.println("IOEstream");
+        }catch (IndexOutOfBoundsException npe){
+            Toast.makeText(getContext(), "Lugar no encontrado", Toast.LENGTH_SHORT).show();;
+        }
     }
 
     @Override
